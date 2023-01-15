@@ -105,8 +105,22 @@ public class InputParser {
             // exit program
             return new ConversionInput("back");
         }
+        
+        //validate that the number base correspond to the source base
+        while (!isNumberInBase(inputNumber, sourceBase)){
 
-// Validate input character
+            if (inputNumber.equalsIgnoreCase("/back")){
+                // exit program
+                return new ConversionInput("back");
+            }
+
+            System.out.print("!!! " + "\"" + inputNumber + "\"" + " is not in base " + sourceBase +
+                    ". Pls enter a number in base " + sourceBase + " to convert to base "
+                    + targetBase + " (To go back type /back) ");
+            inputNumber = sc.nextLine();
+        }
+
+        // Validate input character
         int i;
         ArrayList<Character> invalidCharacters = new ArrayList<>();
         for (i = 0; i < inputNumber.length() ; i++) {
