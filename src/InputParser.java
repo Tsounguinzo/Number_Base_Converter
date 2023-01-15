@@ -97,6 +97,7 @@ public class InputParser {
      * @return a ConversionInput object representing the parsed input, or null if the input is invalid
      */
     public static ConversionInput parseBackInputString() {
+
         System.out.print("Enter number in base " + sourceBase + " to convert to base " + targetBase
                 + " (To go back type /back) ");
         String inputNumber = sc.nextLine();
@@ -105,7 +106,7 @@ public class InputParser {
             // exit program
             return new ConversionInput("back");
         }
-        
+
         //validate that the number base correspond to the source base
         while (!isNumberInBase(inputNumber, sourceBase)){
 
@@ -146,7 +147,8 @@ public class InputParser {
     public static void getMessage() {
         System.out.println(errorMessage + "\n");
     }
-    
+
+
     /**
      * This method checks if a given number is in a valid base by checking if the number
      * only contains valid digits for the given base including fractional numbers.
