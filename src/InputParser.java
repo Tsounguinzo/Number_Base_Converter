@@ -146,4 +146,38 @@ public class InputParser {
     public static void getMessage() {
         System.out.println(errorMessage + "\n");
     }
+    
+    /**
+     * This method checks if a given number is in a valid base by checking if the number
+     * only contains valid digits for the given base including fractional numbers.
+     *
+     * @param number the number to check
+     * @param base the base to check the number against
+     * @return true if the number is in the given base, false otherwise
+     * @throws IllegalArgumentException if base is not within the valid range (2-32)
+     */
+    public static boolean isNumberInBase(String number, int base) {
+        // Check if the base is within the valid range (2-36)
+        if (base < 2 || base > 36) {
+            throw new IllegalArgumentException("Invalid base. Must be between 2 and 36.");
+        }
+        int decimalCount = 0;
+        for (int i = 0; i < number.length(); i++) {
+            char c = number.charAt(i);
+            // Check if the character is a valid digit for the given base
+            if (!Character.isDigit(c) && (c != '.' || decimalCount > 0)) {
+                if (!(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z')) {
+                    return false;
+                }
+                int charValue = Character.isDigit(c) ? c - '0' : Character.toUpperCase(c) - 'A' + 10;
+                if (charValue >= base) {
+                    return false;
+                }
+            }
+            if (c == '.') {
+                decimalCount++;
+            }
+        }
+        return true;
+    }
 }
